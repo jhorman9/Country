@@ -8,7 +8,7 @@ const GetDetails = ({info, country}) =>{
     <div>
       <b>Population: </b>
       {country.population}
-    </div>
+    </div> 
     <div>
       <b>Area: </b>
       {country.area} km2

@@ -8,12 +8,12 @@ const Country = () => {
   const [country, setCountry] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [info, setInfo] = useState("Demography");
-  const [data, setData] = useState("venezuela");
+  const [data, setData] = useState("Venezuela");
   const [refresch, setRefresch] = useState(true)
 
   useEffect(() => {
       axios
-        .get(`https://restcountries.com/v3.1/name/${data}?fullText=true`)
+        .get(`https://restcountries.com/v3.1/name/${data.toLowerCase()}?fullText=true`)
         .then((res) => {
           setIsLoading(false);
           setCountry(res.data[0]);
@@ -27,7 +27,7 @@ const Country = () => {
   console.log(data)
 //RENDERIZADO CONDICIONAL// 
   return (
-    <div>
+    <div className="Input">
       <input
        type="text"
        value = {data}
@@ -37,7 +37,7 @@ const Country = () => {
       {isLoading ? (
         <h1>Esta cargando...</h1>
       ) : (
-        <div>
+        <div className="Country">
           <h1>{country.name?.official}</h1>
           <img src={country.flags?.svg} style={{ width: "300px" }} alt="" />
           <GetDetails info = {info} country ={country} />

@@ -1,18 +1,23 @@
 import React from "react";
 import { useState } from "react";
-import GetMultiple from "./getMultiple";
+import GetMultiple from "./GetMultiple";
 
 const Counter = () => {
   const [counter, setCounter] = useState(0);
 
   //Con funciones para condicionales
+  if(counter < 0){
+    setCounter(0);
+  }
 
   return (
-    <div>
+    <div className="Counter-cont">
       <h1>{counter}</h1>
-      <button onClick={() => setCounter(counter - 1)}>Decrement</button>
-      <button onClick={() => setCounter(counter + 1)}>Increment</button>
-      <GetMultiple counter ={counter}/>
+      <div className="btns">
+        <button onClick={() => setCounter(counter - 1)}>Decrement</button>
+        <button onClick={() => setCounter(counter + 1)}>Increment</button>
+      </div>
+      <GetMultiple counter={counter} />
     </div>
   );
 };
