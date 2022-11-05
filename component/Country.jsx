@@ -9,7 +9,7 @@ const Country = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [info, setInfo] = useState("Demography");
   const [data, setData] = useState("Venezuela");
-  const [refresch, setRefresch] = useState(true)
+  const [refresch, setRefresch] = useState(true);
 
   useEffect(() => {
       axios
@@ -23,11 +23,21 @@ const Country = () => {
   const refrescar = () =>{
     setRefresch(!refresch)
   }
+  
+  const handler = (ev) => {
+    ev.preventDefault();
+    axios
+        .get(`https://restcountries.com/v3.1/name/${data}?fullText=true`)
+        .then((res) => {
+          setIsLoading(false);
+          setCountry(res.data[0]);
+        })
+  }
 
   console.log(data)
 //RENDERIZADO CONDICIONAL// 
   return (
-    <div className="Input">
+    <div className="Input" onSubmit={handler}>
       <input
        type="text"
        value = {data}
