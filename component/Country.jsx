@@ -8,7 +8,7 @@ const Country = () => {
   const [country, setCountry] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [info, setInfo] = useState("Demography");
-  const [data, setData] = useState("Venezuela");
+  const [data, setData] = useState("Panama");
   const [refresch, setRefresch] = useState(true);
 
   useEffect(() => {
