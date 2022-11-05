@@ -8,36 +8,38 @@ const Country = () => {
   const [country, setCountry] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [info, setInfo] = useState("Demography");
-  const [data, setData] = useState("Venezuela");
-  const [refresch, setRefresch] = useState(true)
+  const [data, setData] = useState("venezuela");
 
   useEffect(() => {
       axios
-        .get(`https://restcountries.com/v3.1/name/${data.toLowerCase()}?fullText=true`)
+        .get(`https://restcountries.com/v3.1/name/${data}?fullText=true`)
         .then((res) => {
           setIsLoading(false);
           setCountry(res.data[0]);
         })
   }, []);
 
-  const refrescar = () =>{
-    setRefresch(!refresch)
+  const handler = (e) =>{
+    axios
+        .get(`https://restcountries.com/v3.1/name/${data}?fullText=true`)
+        .then((res) => setCountry(res.data[0]));
   }
-
-  console.log(data)
+  console.log(country)
 //RENDERIZADO CONDICIONAL// 
   return (
     <div className="Input">
-      <input
-       type="text"
-       value = {data}
-       onChange={ev => setData(ev.target.value)}
-       />
-       <button onClick={refrescar}>{refresch ? "search" : "founded"}</button> 
+      <form onSubmit={handler}>
+        <input
+        type="text"
+        value = {data}
+        onChange={e => setData(e.target.value)}
+        />
+      </form>
+       <button onClick={handler}>Search</button> 
       {isLoading ? (
-        <h1>Esta cargando...</h1>
-      ) : (
-        <div className="Country">
+        <h1>Loading...</h1>
+        ) : (
+          <div className="Country">
           <h1>{country.name?.official}</h1>
           <img src={country.flags?.svg} style={{ width: "300px" }} alt="" />
           <GetDetails info = {info} country ={country} />
