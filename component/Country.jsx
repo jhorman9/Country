@@ -13,7 +13,7 @@ const Country = () => {
 
   useEffect(() => {
       axios
-        .get(`https://restcountries.com/v3.1/name/${data.toLowerCase()}?fullText=true`)
+        .get(`https://restcountries.com/v3.1/name/${data}?fullText=true`)
         .then((res) => {
           setIsLoading(false);
           setCountry(res.data[0]);
